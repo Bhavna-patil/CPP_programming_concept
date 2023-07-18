@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string.h>
+#include<math.h>
 using namespace std;
 class person
 {
@@ -73,13 +74,10 @@ class Coordinate
     void setCoordinateY(int b){y=b;}
     int getCoordinateX(){return x;}
     int getCoordinateY(){return y;}
-    Coordinate getDistance() {return *this;}//distance from origin 
-    virtual Coordinate getDistance(Coordinate c)//distance b/w two coordinate
+    float getDistance() {return sqrt(x*x,y*y);}//distance from origin 
+    virtual float getDistance(Coordinate C)//distance b/w two coordinate
     {
-       Coordinate temp;
-          temp.x=x-c.x;
-          temp.y=y-c.y;
-          return temp;
+       return sqrt((x-C.x)*(x-C.x)-(y-C.y)*(y-C.y));
     }
 };
 class Shape
@@ -97,12 +95,9 @@ class StraightLine:public Shape,public Coordinate
        Coordinate c1,c2;
     public:
        void setLine(Coordinate a,Coordinate b){c1=a,c2=b;}   
-       Coordinate getDistance(Coordinate a,Coordinate b)//distance b/w two coordinate
+       float getDistance()//distance b/w two coordinate
       {
-          Coordinate temp;
-          temp.setCoordinateX(a.getCoordinateX()-b.getCoordinateX());
-          temp.setCoordinateY(a.getCoordinateY()-b.getCoordinateY());
-          return temp;
+          return c1.getDistance(c2);
       }
       void showLine()
       {
@@ -143,7 +138,7 @@ class GameResult:public Game
        }
        int getResult(int round)
        {
-        return round;
+        return gmrslt[round-1];
        }
        void FinalResult();
 };

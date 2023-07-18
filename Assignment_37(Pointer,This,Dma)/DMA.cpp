@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string.h>
 using namespace std;
-//************* 1*************
+//define class persone and define destructor to initialize member variable 
 class person
 {
     private:
@@ -14,7 +14,7 @@ class person
           this->age=age;
         }    
 };
-//************** 2*********
+//Define a complex class with parametrized construct 
 class Complex
 {
     private:
@@ -37,7 +37,8 @@ void f1()
     c->showData();
     delete c; 
 }
-//**************** 4 ***********
+/**define a time class with appropriate methods and define an other method to dynamically
+   creat an array of time object of specified size also define a method to sort time obj**/
 class Time
 {
     private:
@@ -77,7 +78,7 @@ class Time
        {
            int i,r;
            Time temp;
-           for(r=1;r<5;r++)
+           for(r=1;r<size;r++)
            {
              for(i=0;i<size-r;i++)
              {
@@ -97,15 +98,43 @@ class Time
                t[i].ShowTime();
        }
 };
-//******************* 8 *******************
+/** define a class string with char pointer and length of string as instance member,define a 
+    metod to hold the add of variable length string**/
 class String
 {
     private:
         char *str;
         int length;
+    protected:
+         char* InputString()
+        {
+            char *q,ch,*p;
+            int i,size=1;
+            p=new char[size];
+            p[0]='\0';
+            while(1) 
+            {
+               ch=getchar();
+               if(ch=='\n')
+                  break;
+               q=new char[size+1];
+               for(i=0;i<size;i++)   
+                  q[i]=p[i];
+               q[size-1]=ch;
+               q[size]='\0';  
+               delete []p;
+               str=new char[size+1];
+               strcpy(p,q);
+               delete []q;
+               size++;
+            }
+            return p;
+        }   
     public:
         String()
-        {
+        { 
+           str=NULL;
+           length=0;
         }
         String(String &s)
         {
@@ -120,29 +149,12 @@ class String
             strcpy(str,s.str);
             length=s.length;
         }
-        void InputString()
+        void SetString()
         {
-            char *q,ch;
-            int i,size=1;
-            str=new char[size];
-            str[0]='\0';
-            while(1) 
-            {
-               ch=getchar();
-               if(ch=='\n')
-                  break;
-               q=new char[size+1];
-               for(i=0;i<size;i++)   
-                  q[i]=str[i];
-               q[size-1]=ch;
-               q[size]='\0';  
-               delete []str;
-               str=new char[size+1];
-               strcpy(str,q);
-               delete []q;
-               size++;
-            }
-            length=strlen(str);
+           if(str!=NULL)
+              delete str;
+           str=InputString();
+           length=strlen(str);
         }
         void SetString(char *s)
         {
@@ -153,17 +165,9 @@ class String
             strcpy(str,s);
         }
         void ShowString(){ cout<<str<<endl;}
-        void StrUpr(String s){ strupr(s.str); }
-        void StrLwr(String s){  strlwr(s.str);}
+        void StrUpr(){ strupr(str); }
+        void StrLwr(){  strlwr(str);}
         char* getString(){ return str;}
         int getLength(){ return length; }
         ~String(){ delete []str; }
 };
-int main()
-{
-   String s1,s2,s3;
-   s1.InputString();
-   s1.ShowString();
-   cout<<s1.getLength();
-   return 0;
-}

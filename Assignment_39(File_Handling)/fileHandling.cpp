@@ -46,7 +46,7 @@ int Is_word(char *str)
     return 0; 
     fin.close();  
 }
-//**************** 3 ********************
+// Read/write data object by object 
 class Employee
 {
   private:

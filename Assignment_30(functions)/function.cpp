@@ -1,6 +1,8 @@
 #include<iostream>
 #include<math.h>
 using namespace std;
+//Check Prime Number
+
 int Is_prime(int a)
 {
     int i;
@@ -10,7 +12,7 @@ int Is_prime(int a)
     if(i=a/2+1)    
        return 1;   
 }
-
+// Find Highest Digit in given Number
 int find_highest_digit(int a)
 {
     int h=0;
@@ -22,7 +24,7 @@ int find_highest_digit(int a)
     }
     return h;
 }
-
+//calculate X raised to the power Y
 int calculate_X_to_power_Y(int x,int y)
 {
     int p;
@@ -31,7 +33,7 @@ int calculate_X_to_power_Y(int x,int y)
     p=calculate_X_to_power_Y(x,y-1)*x;  
     return p;
 }
-
+// Calculate Factorial
 int fact(int a)
 {
     int i,fact=1;
@@ -39,11 +41,13 @@ int fact(int a)
      fact*=i;
     return fact;
 }
+//Calculate combination
 
 int combi(int n,int r)
 {
     return fact(n)/(fact(r)*fact(n-r));
 }
+//Pascal Triangle
 
 void print_pascale_triangle(int line)
 {
@@ -68,7 +72,7 @@ void print_pascale_triangle(int line)
         cout<<endl;
     }
 }
-
+//Check Number is A term in fibonacci series
 int Is_term_in_fibonacci_series(int num) 
 {
     int a=-1,b=1,c=0;
@@ -82,14 +86,14 @@ int Is_term_in_fibonacci_series(int num)
     }
     return 0;  
 }
-
+// swap(call by reference)
 void swap(int &a,int &b)
 {
     a=a+b;
     b=a-b;
     a=a-b;
 }
-
+//function to add number using default argument
 int add(int a,int b,int c=0)
 {
     return a+b+c;
